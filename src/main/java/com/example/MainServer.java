@@ -3,6 +3,8 @@ package com.example;
 public class MainServer {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Server s = new Server();
+        s.attendi();
+        s.comunica();
     }
 }

@@ -8,6 +8,9 @@ public class Mainclient
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Client c = new Client();
+        c.connetti();
+        c.comunica();
     }
+    
 }
