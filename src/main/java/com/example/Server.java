@@ -42,7 +42,6 @@ public class Server {
                     outVersoClient.writeBytes("fine lista\n");                  //messaggio per dire che non c'è altro in lista
                 }else{     //se è un qualsiasi altro messaggio
                 listaNote.add(stringaRicevuta); //aggiunge il messaggio in lista
-                System.out.println("nota salvata: '" + stringaRicevuta + "' in posizione " + (listaNote.size()-1) + "\n"); //messaggio che ho aggiunto per vedere nel server cosa aggiunge e in che posizione
                 outVersoClient.writeBytes("nota Salvata \n");//messaggio che dice che la nota è salvata con successo
                 }
                 
