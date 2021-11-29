@@ -17,10 +17,10 @@ public class Server {
             System.out.println("1 SERVER partito in esecuzione ...");
             server = new ServerSocket(6789);
             client = server.accept();
-            server.close();
+            server.close();  //chiudo il server per inibire gli altri client
             inDalClient = new BufferedReader(new InputStreamReader (client.getInputStream()));
             outVersoClient = new DataOutputStream(client.getOutputStream());
-            outVersoClient.writeBytes("connessione effettuata \n");
+            outVersoClient.writeBytes("connessione effettuata \n"); //messaggio di connessione effettuata 
         } catch (Exception e)
         {
             System.out.println(e.getMessage());
@@ -34,15 +34,16 @@ public class Server {
         for(;;){
             try{
                 outVersoClient.writeBytes("Inserisci la nota da memorizzare o digita LISTA per visualizzare le note salvate \n");
-                stringaRicevuta = inDalClient.readLine();
-                if(stringaRicevuta.equalsIgnoreCase("LISTA")){
+                stringaRicevuta = inDalClient.readLine(); //messaggio dal client
+                if(stringaRicevuta.equalsIgnoreCase("LISTA")){                  //se viene scritto lista
                     for(int i=0;i<listaNote.size();i+=1){
-                        outVersoClient.writeBytes(listaNote.get(i) + "\n");
+                        outVersoClient.writeBytes(listaNote.get(i) + "\n");     //for di invio delle note scritte in lista 
                     }
-                    outVersoClient.writeBytes("fine lista\n");
-                }else{
-                listaNote.add(stringaRicevuta);
-                outVersoClient.writeBytes("nota Salvata \n");
+                    outVersoClient.writeBytes("fine lista\n");                  //messaggio per dire che non c'è altro in lista
+                }else{     //se è un qualsiasi altro messaggio
+                listaNote.add(stringaRicevuta); //aggiunge il messaggio in lista
+                System.out.println("nota salvata: '" + stringaRicevuta + "' in posizione " + (listaNote.size()-1) + "\n"); //messaggio che ho aggiunto per vedere nel server cosa aggiunge e in che posizione
+                outVersoClient.writeBytes("nota Salvata \n");//messaggio che dice che la nota è salvata con successo
                 }
                 
             } catch (Exception e){

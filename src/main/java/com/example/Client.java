@@ -21,7 +21,7 @@ public class Client {
             outVersoServer = new DataOutputStream(mioSocket.getOutputStream());
             inDalServer = new BufferedReader(new InputStreamReader(mioSocket.getInputStream()));
             stringaRicevutaDalServer = inDalServer.readLine();
-            System.out.println(stringaRicevutaDalServer);
+            System.out.println(stringaRicevutaDalServer); //System.out.println del messaggio di connessione effettuata
         }catch(UnknownHostException e){
             System.err.println("host non riconosciuto"); //messaggio errore
         }catch(Exception e){
@@ -37,19 +37,19 @@ public class Client {
         for(;;){
             try{
             stringaRicevutaDalServer = inDalServer.readLine();
-            System.out.println(stringaRicevutaDalServer );
+            System.out.println(stringaRicevutaDalServer );//istruzioni dal server
             stringaUtente = tastiera.readLine();
-            outVersoServer.writeBytes(stringaUtente + "\n");
-            if(stringaUtente.equalsIgnoreCase("LISTA")){
-                for(;;){
-                    stringaRicevutaDalServer = inDalServer.readLine();
+            outVersoServer.writeBytes(stringaUtente + "\n"); //prende il messaggio scritto da tastiera e lo manda al server
+            if(stringaUtente.equalsIgnoreCase("LISTA")){   //se il messaggio è "lista"
+                for(;;){        //continua a ricevere messaggi dal server finchè non gli arriva il messaggio di fine
+                    stringaRicevutaDalServer = inDalServer.readLine();  
                     if(stringaRicevutaDalServer.equalsIgnoreCase("fine lista")){
                         break;
                     }
                     System.out.println(stringaRicevutaDalServer );
                 }
             }else{
-            stringaRicevutaDalServer = inDalServer.readLine();
+            stringaRicevutaDalServer = inDalServer.readLine();      //messaggio di nota salvata
             System.out.println(stringaRicevutaDalServer);
             }
             }catch(Exception e){
